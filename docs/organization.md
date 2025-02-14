@@ -3,14 +3,14 @@
 <a name="list-organizations"></a>
 ## ListOrganizations: 加盟店組織の一覧を取得する
 
-```typescript
-const response: Response<PaginatedOrganizations> = await client.send(new ListOrganizations({
-  private_money_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", // マネーID
-  page: 1, // ページ番号
-  per_page: 50, // 1ページ分の取引数
-  name: "J93Y52", // 組織名
-  code: "C590AS7U" // 組織コード
-}));
+```PYTHON
+response = client.send(pp.ListOrganizations(
+                          "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",               # private_money_id: マネーID
+                          page=1,                                               # ページ番号
+                          per_page=50,                                          # 1ページ分の取引数
+                          name="JRhR",                                          # 組織名
+                          code="Vs"                                             # 組織コード
+))
 ```
 
 
@@ -84,7 +84,7 @@ const response: Response<PaginatedOrganizations> = await client.send(new ListOrg
 |---|---|---|---|
 |400|invalid_parameters|項目が無効です|Invalid parameters|
 |403|unpermitted_admin_user|この管理ユーザには権限がありません|Admin does not have permission|
-|422|private_money_not_found||Private money not found|
+|422|private_money_not_found|マネーが見つかりません|Private money not found|
 
 
 
@@ -94,22 +94,22 @@ const response: Response<PaginatedOrganizations> = await client.send(new ListOrg
 <a name="create-organization"></a>
 ## CreateOrganization: 新規加盟店組織を追加する
 
-```typescript
-const response: Response<Organization> = await client.send(new CreateOrganization({
-  code: "ox-supermarket", // 新規組織コード
-  name: "oxスーパー", // 新規組織名
-  private_money_ids: ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"], // 加盟店組織で有効にするマネーIDの配列
-  issuer_admin_user_email: "iB0DiDGREm@ImyJ.com", // 発行体担当者メールアドレス
-  member_admin_user_email: "DbbC2wEGBf@cAGc.com", // 新規組織担当者メールアドレス
-  bank_name: "XYZ銀行", // 銀行名
-  bank_code: "1234", // 銀行金融機関コード
-  bank_branch_name: "ABC支店", // 銀行支店名
-  bank_branch_code: "123", // 銀行支店コード
-  bank_account_type: "saving", // 銀行口座種別 (普通=saving, 当座=current, その他=other)
-  bank_account: "1234567", // 銀行口座番号
-  bank_account_holder_name: "ﾌｸｻﾞﾜﾕｷﾁ", // 口座名義人名
-  contact_name: "佐藤清" // 担当者名
-}));
+```PYTHON
+response = client.send(pp.CreateOrganization(
+                          "ox-supermarket",                                     # code: 新規組織コード
+                          "oxスーパー",                                             # name: 新規組織名
+                          ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"], # private_money_ids: 加盟店組織で有効にするマネーIDの配列
+                          "9HjzBAZfWz@O75y.com",                                # issuer_admin_user_email: 発行体担当者メールアドレス
+                          "HWR5FLMa9C@O3Gm.com",                                # member_admin_user_email: 新規組織担当者メールアドレス
+                          bank_name="XYZ銀行",                                    # 銀行名
+                          bank_code="1234",                                     # 銀行金融機関コード
+                          bank_branch_name="ABC支店",                             # 銀行支店名
+                          bank_branch_code="123",                               # 銀行支店コード
+                          bank_account_type="other",                            # 銀行口座種別 (普通=saving, 当座=current, その他=other)
+                          bank_account="1234567",                               # 銀行口座番号
+                          bank_account_holder_name="ﾌｸｻﾞﾜﾕｷﾁ",                  # 口座名義人名
+                          contact_name="佐藤清"                                    # 担当者名
+))
 ```
 
 
