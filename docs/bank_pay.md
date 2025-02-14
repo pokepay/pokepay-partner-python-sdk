@@ -2,15 +2,62 @@
 BankPayを用いた銀行からのチャージ取引などのAPIを提供しています。
 
 
+<a name="delete-bank"></a>
+## DeleteBank: 銀行口座の削除
+銀行口座を削除します
+
+```PYTHON
+response = client.send(pp.DeleteBank(
+                          "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",               # user_device_id: デバイスID
+                          "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+))
+```
+
+
+
+### Parameters
+**`user_device_id`** 
+  
+
+
+```json
+{
+  "type": "string",
+  "format": "uuid"
+}
+```
+
+**`bank_id`** 
+  
+
+
+```json
+{
+  "type": "string",
+  "format": "uuid"
+}
+```
+
+
+
+成功したときは
+[BankDeleted](./responses.md#bank-deleted)
+を返します
+
+
+
+---
+
+
 <a name="list-banks"></a>
 ## ListBanks: 登録した銀行の一覧
 登録した銀行を一覧します
 
-```typescript
-const response: Response<Banks> = await client.send(new ListBanks({
-  user_device_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", // デバイスID
-  private_money_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-}));
+```PYTHON
+response = client.send(pp.ListBanks(
+                          "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",               # user_device_id: デバイスID
+                          private_money_id="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+))
 ```
 
 
@@ -57,15 +104,15 @@ const response: Response<Banks> = await client.send(new ListBanks({
 アプリの場合はDeep Linkを使うことを想定しています。
 
 
-```typescript
-const response: Response<BankRegisteringInfo> = await client.send(new CreateBank({
-  user_device_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", // デバイスID
-  private_money_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", // マネーID
-  callback_url: "<Deep Link>", // コールバックURL
-  kana: "ポケペイタロウ", // ユーザーの氏名 (片仮名で指定)
-  email: "suth9pSzmq@VAxW.com", // ユーザーのメールアドレス
-  birthdate: "19901142" // 生年月日
-}));
+```PYTHON
+response = client.send(pp.CreateBank(
+                          "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",               # user_device_id: デバイスID
+                          "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",               # private_money_id: マネーID
+                          "<Deep Link>",                                        # callback_url: コールバックURL
+                          "ポケペイタロウ",                                            # kana: ユーザーの氏名 (片仮名で指定)
+                          email="grVDfW2ufN@p0gA.com",                          # ユーザーのメールアドレス
+                          birthdate="19901142"                                  # 生年月日
+))
 ```
 
 
@@ -153,14 +200,15 @@ const response: Response<BankRegisteringInfo> = await client.send(new CreateBank
 ## CreateBankTopupTransaction: 銀行からのチャージ
 指定のマネーのアカウントにbank_idの口座を用いてチャージを行います。
 
-```typescript
-const response: Response<TransactionDetail> = await client.send(new CreateBankTopupTransaction({
-  user_device_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", // デバイスID
-  private_money_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", // マネーID
-  amount: 8244, // チャージ金額
-  bank_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", // 銀行ID
-  request_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" // リクエストID
-}));
+```PYTHON
+response = client.send(pp.CreateBankTopupTransaction(
+                          "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",               # user_device_id: デバイスID
+                          "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",               # private_money_id: マネーID
+                          2556,                                                 # amount: チャージ金額
+                          "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",               # bank_id: 銀行ID
+                          "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",               # request_id: リクエストID
+                          receiver_user_id="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" # 受け取りユーザーID (デフォルトは自身)
+))
 ```
 
 
@@ -200,6 +248,17 @@ const response: Response<TransactionDetail> = await client.send(new CreateBankTo
 ```
 
 **`bank_id`** 
+  
+
+
+```json
+{
+  "type": "string",
+  "format": "uuid"
+}
+```
+
+**`receiver_user_id`** 
   
 
 

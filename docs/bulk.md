@@ -4,14 +4,14 @@
 ## BulkCreateTransaction: CSVファイル一括取引
 CSVファイルから一括取引をします。
 
-```typescript
-const response: Response<BulkTransaction> = await client.send(new BulkCreateTransaction({
-  name: "GSOhV764tKT9oH", // 一括取引タスク名
-  content: "jnPne51Y", // 取引する情報のCSV
-  request_id: "ZOU0zGq4PpZBc0rJPOstD7C9IM7suB5w40dZ", // リクエストID
-  description: "TsuKZGsFElmQpA4RSTaTlLaqlkU49OXmcM1eYLCIvDzYzwAtEksQWSl6Am3gCBrhM35Efmr", // 一括取引の説明
-  private_money_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" // マネーID
-}));
+```PYTHON
+response = client.send(pp.BulkCreateTransaction(
+                          "Lm8H",                                               # name: 一括取引タスク名
+                          "uYz",                                                # content: 取引する情報のCSV
+                          "7E9ZuYBAHz0vH45u4SHdXpfYeqMtcfd8wxcy",               # request_id: リクエストID
+                          description="IW1kAzyAHjkW0eFslSf8NaBTyV6GBT8tDHI0zWcr0sMpkdiHOOwl5xIQiAP4UplfuFUQK5yc0JqyEbk4xV1ElwOVpwOgCs3REJLXlOpH", # 一括取引の説明
+                          private_money_id="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" # マネーID
+))
 ```
 
 
@@ -110,7 +110,7 @@ const response: Response<BulkTransaction> = await client.send(new BulkCreateTran
 |403|unpermitted_admin_user|この管理ユーザには権限がありません|Admin does not have permission|
 |403|organization_not_issuer|発行体以外に許可されていない操作です|Unpermitted operation except for issuer organizations.|
 |409|NULL|NULL|NULL|
-|422|private_money_not_found||Private money not found|
+|422|private_money_not_found|マネーが見つかりません|Private money not found|
 |422|bulk_transaction_invalid_csv_format|入力されたCSVデータに誤りがあります|Invalid csv format|
 
 
